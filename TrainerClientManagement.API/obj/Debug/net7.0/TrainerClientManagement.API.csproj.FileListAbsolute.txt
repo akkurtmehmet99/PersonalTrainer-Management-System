@@ -1,0 +1,92 @@
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/appsettings.json
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/TrainerClientManagement.API
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/TrainerClientManagement.API.deps.json
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/TrainerClientManagement.API.runtimeconfig.json
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/TrainerClientManagement.API.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/TrainerClientManagement.API.pdb
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/Azure.Core.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/Azure.Identity.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/Humanizer.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/Microsoft.Bcl.AsyncInterfaces.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/Microsoft.Data.SqlClient.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.Abstractions.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.Design.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.Relational.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.SqlServer.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/Microsoft.Extensions.DependencyModel.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/Microsoft.Identity.Client.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/Microsoft.Identity.Client.Extensions.Msal.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/Microsoft.IdentityModel.Abstractions.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/Microsoft.IdentityModel.Logging.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/Microsoft.IdentityModel.Protocols.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/Microsoft.IdentityModel.Tokens.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/Microsoft.OpenApi.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/Microsoft.SqlServer.Server.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/Microsoft.Win32.SystemEvents.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/Mono.TextTemplating.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/Swashbuckle.AspNetCore.Swagger.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/System.CodeDom.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/System.Configuration.ConfigurationManager.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/System.Drawing.Common.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/System.IdentityModel.Tokens.Jwt.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/System.Memory.Data.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/System.Runtime.Caching.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/System.Security.Cryptography.ProtectedData.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/System.Security.Permissions.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/System.Windows.Extensions.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/runtimes/unix/lib/net6.0/Microsoft.Data.SqlClient.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/runtimes/win/lib/net6.0/Microsoft.Data.SqlClient.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/runtimes/win-arm/native/Microsoft.Data.SqlClient.SNI.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/runtimes/win-arm64/native/Microsoft.Data.SqlClient.SNI.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/runtimes/win-x64/native/Microsoft.Data.SqlClient.SNI.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/runtimes/win/lib/net6.0/Microsoft.Win32.SystemEvents.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/runtimes/unix/lib/net6.0/System.Drawing.Common.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/runtimes/win/lib/net6.0/System.Drawing.Common.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/runtimes/win/lib/net6.0/System.Runtime.Caching.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/runtimes/win/lib/net6.0/System.Security.Cryptography.ProtectedData.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/bin/Debug/net7.0/runtimes/win/lib/net6.0/System.Windows.Extensions.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/obj/Debug/net7.0/TrainerClientManagement.API.csproj.AssemblyReference.cache
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/obj/Debug/net7.0/TrainerClientManagement.API.GeneratedMSBuildEditorConfig.editorconfig
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/obj/Debug/net7.0/TrainerClientManagement.API.AssemblyInfoInputs.cache
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/obj/Debug/net7.0/TrainerClientManagement.API.AssemblyInfo.cs
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/obj/Debug/net7.0/TrainerClientManagement.API.csproj.CoreCompileInputs.cache
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/obj/Debug/net7.0/TrainerClientManagement.API.MvcApplicationPartsAssemblyInfo.cs
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/obj/Debug/net7.0/TrainerClientManagement.API.MvcApplicationPartsAssemblyInfo.cache
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/obj/Debug/net7.0/staticwebassets/msbuild.TrainerClientManagement.API.Microsoft.AspNetCore.StaticWebAssets.props
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/obj/Debug/net7.0/staticwebassets/msbuild.build.TrainerClientManagement.API.props
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/obj/Debug/net7.0/staticwebassets/msbuild.buildMultiTargeting.TrainerClientManagement.API.props
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/obj/Debug/net7.0/staticwebassets/msbuild.buildTransitive.TrainerClientManagement.API.props
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/obj/Debug/net7.0/staticwebassets.pack.json
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/obj/Debug/net7.0/staticwebassets.build.json
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/obj/Debug/net7.0/staticwebassets.development.json
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/obj/Debug/net7.0/scopedcss/bundle/TrainerClientManagement.API.styles.css
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/obj/Debug/net7.0/TrainerClientManagement.API.csproj.CopyComplete
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/obj/Debug/net7.0/TrainerClientManagement.API.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/obj/Debug/net7.0/refint/TrainerClientManagement.API.dll
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/obj/Debug/net7.0/TrainerClientManagement.API.pdb
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/obj/Debug/net7.0/TrainerClientManagement.API.genruntimeconfig.cache
+/Users/mehmetakkurt/Downloads/GitHub Desktop.app/TrainerClientManagement.API/TrainerClientManagement.API/obj/Debug/net7.0/ref/TrainerClientManagement.API.dll
+/tmp/trainer-client-management-api-build/Debug/net7.0/appsettings.json
+/tmp/trainer-client-management-api-build/Debug/net7.0/bin/Debug/net7.0/appsettings.json
+/tmp/trainer-client-management-api-build/Debug/net7.0/bin/Debug/net7.0/TrainerClientManagement.API.deps.json
+/tmp/trainer-client-management-api-build/Debug/net7.0/bin/Debug/net7.0/TrainerClientManagement.API.runtimeconfig.json
+/tmp/trainer-client-management-api-build/Debug/net7.0/TrainerClientManagement.API
+/tmp/trainer-client-management-api-build/Debug/net7.0/TrainerClientManagement.API.deps.json
+/tmp/trainer-client-management-api-build/Debug/net7.0/TrainerClientManagement.API.runtimeconfig.json
+/tmp/trainer-client-management-api-build/Debug/net7.0/TrainerClientManagement.API.dll
+/tmp/trainer-client-management-api-build/Debug/net7.0/TrainerClientManagement.API.pdb
+/tmp/trainer-client-management-api-tests/Debug/net7.0/appsettings.json
+/tmp/trainer-client-management-api-tests/Debug/net7.0/bin/Debug/net7.0/appsettings.json
+/tmp/trainer-client-management-api-tests/Debug/net7.0/bin/Debug/net7.0/TrainerClientManagement.API.deps.json
+/tmp/trainer-client-management-api-tests/Debug/net7.0/bin/Debug/net7.0/TrainerClientManagement.API.runtimeconfig.json
+/tmp/trainer-client-management-api-tests/Debug/net7.0/TrainerClientManagement.API
+/tmp/trainer-client-management-api-tests/Debug/net7.0/TrainerClientManagement.API.deps.json
+/tmp/trainer-client-management-api-tests/Debug/net7.0/TrainerClientManagement.API.runtimeconfig.json
+/tmp/trainer-client-management-api-tests/Debug/net7.0/TrainerClientManagement.API.dll
+/tmp/trainer-client-management-api-tests/Debug/net7.0/TrainerClientManagement.API.pdb
