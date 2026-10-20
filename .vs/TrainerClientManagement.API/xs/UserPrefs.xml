@@ -1,0 +1,36 @@
+﻿<Properties StartupConfiguration="{F6039AF0-ADB6-4A53-AE02-684636EA8F8F}|Default">
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.TrainerClientManagement.API PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workbench ActiveDocument="TrainerClientManagement.API/TrainerClientManagement.API.csproj">
+    <Files>
+      <File FileName="TrainerClientManagement.API/Program.cs" Line="30" Column="1" />
+      <File FileName="TrainerClientManagement.API/Models/Trainer.cs" Line="12" Column="1" />
+      <File FileName="TrainerClientManagement.API/Models/Client.cs" Line="16" Column="1" />
+      <File FileName="TrainerClientManagement.API/Models/Appointment.cs" Line="20" Column="1" />
+      <File FileName="TrainerClientManagement.API/Data/AppDbContext.cs" Line="18" Column="1" />
+      <File FileName="TrainerClientManagement.API/appsettings.json" Line="35" Column="1" />
+      <File FileName="TrainerClientManagement.API/Controllers/TrainersController.cs" Line="37" Column="1" />
+      <File FileName="TrainerClientManagement.API/Controllers/ClientsController.cs" Line="38" Column="1" />
+      <File FileName="TrainerClientManagement.API/Controllers/AppointmentsController.cs" Line="3" Column="17" />
+      <File FileName="TrainerClientManagement.API/TrainerClientManagement.API.csproj" Line="31" Column="11" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="TrainerClientManagement.API" expanded="True" selected="True">
+            <Node name="TrainerClientManagement.API" expanded="True">
+              <Node name="Controllers" expanded="True" />
+              <Node name="Data" expanded="True" />
+              <Node name="Models" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+</Properties>
