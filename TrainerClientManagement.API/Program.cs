@@ -4,7 +4,6 @@ using TrainerClientManagement.API.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Datenbankdienst registrieren
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 if (string.IsNullOrWhiteSpace(connectionString))
 {
@@ -13,7 +12,7 @@ if (string.IsNullOrWhiteSpace(connectionString))
 }
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseSqlite(connectionString));
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -21,32 +20,31 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
     {
-        Title = "Trainer- und Kundenverwaltung mit Terminplanung",
+        Title = "Personal Trainer Management API",
         Version = "v1",
-        Description = "RESTful Web-API zur Verwaltung von Trainern, Kunden und Terminen."
+        Description = "RESTful API zur Verwaltung von Trainern, Kunden und Coaching-Sitzungen."
     });
 });
 
 var app = builder.Build();
 
-// Globales Middleware zur Ausnahmebehandlung
 app.UseMiddleware<GlobalExceptionMiddleware>();
 
-// HTTP-Anforderungspipeline konfigurieren
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Trainer Client API V1");
-        c.RoutePrefix = string.Empty; // Swagger wird direkt auf der Startseite geöffnet.
-    });
-}
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Personal Trainer Management API v1");
+    c.RoutePrefix = string.Empty;
+});
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
+
+await using (var scope = app.Services.CreateAsyncScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    await dbContext.Database.EnsureCreatedAsync();
+}
 
 app.Run();

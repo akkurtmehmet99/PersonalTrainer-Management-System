@@ -30,4 +30,8 @@ namespace TrainerClientManagement.API.DTOs
         [Range(1, int.MaxValue, ErrorMessage = "Bitte wählen Sie einen gültigen Trainer aus.")]
         public int TrainerId { get; set; }
     }
+
+    public sealed class UpdateClientDto : CreateClientDto
+    {
+    }
 }

@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TrainerClientManagement.API.Data;
 using TrainerClientManagement.API.DTOs;
@@ -17,32 +17,72 @@ namespace TrainerClientManagement.API.Controllers
             _context = context;
         }
 
-        // Alle Termine abrufen (Filterung mit ?trainerId=1)
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<AppointmentDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<IEnumerable<AppointmentDto>>> GetAppointments(
             [FromQuery] int? trainerId,
+            [FromQuery] int? clientId,
+            [FromQuery] string? status,
+            [FromQuery] DateTime? from,
+            [FromQuery] DateTime? to,
             CancellationToken cancellationToken)
         {
-            var query = _context.Appointments
-                .AsNoTracking()
-                .AsQueryable();
+            if (from.HasValue && to.HasValue && from.Value > to.Value)
+            {
+                return Problem(
+                    statusCode: StatusCodes.Status400BadRequest,
+                    title: "Geçersiz tarih aralığı",
+                    detail: "'from' tarihi 'to' tarihinden sonra olamaz.");
+            }
 
+            var normalizedStatus = status is null ? null : NormalizeStatus(status);
+            if (status is not null && normalizedStatus is null)
+            {
+                return Problem(
+                    statusCode: StatusCodes.Status400BadRequest,
+                    title: "Geçersiz randevu durumu",
+                    detail: "Durum Scheduled, Completed veya Cancelled olmalıdır.");
+            }
+
+            var query = _context.Appointments.AsNoTracking();
             if (trainerId.HasValue)
             {
-                query = query.Where(a => a.TrainerId == trainerId.Value);
+                query = query.Where(appointment => appointment.TrainerId == trainerId.Value);
+            }
+
+            if (clientId.HasValue)
+            {
+                query = query.Where(appointment => appointment.ClientId == clientId.Value);
+            }
+
+            if (normalizedStatus is not null)
+            {
+                query = query.Where(appointment => appointment.Status == normalizedStatus);
+            }
+
+            if (from.HasValue)
+            {
+                query = query.Where(appointment => appointment.AppointmentDate >= from.Value);
+            }
+
+            if (to.HasValue)
+            {
+                query = query.Where(appointment => appointment.AppointmentDate <= to.Value);
             }
 
             var appointments = await query
-                .Select(a => new AppointmentDto
+                .OrderBy(appointment => appointment.AppointmentDate)
+                .Select(appointment => new AppointmentDto
                 {
-                    Id = a.Id,
-                    AppointmentDate = a.AppointmentDate,
-                    Status = a.Status,
-                    TrainerId = a.TrainerId,
-                    TrainerName = a.Trainer != null ? a.Trainer.Name : string.Empty,
-                    ClientId = a.ClientId,
-                    ClientName = a.Client != null ? a.Client.Name : string.Empty
+                    Id = appointment.Id,
+                    AppointmentDate = appointment.AppointmentDate,
+                    Status = appointment.Status,
+                    DurationMinutes = appointment.DurationMinutes,
+                    TrainerId = appointment.TrainerId,
+                    TrainerName = appointment.Trainer != null ? appointment.Trainer.Name : string.Empty,
+                    ClientId = appointment.ClientId,
+                    ClientName = appointment.Client != null ? appointment.Client.Name : string.Empty
                 })
                 .ToListAsync(cancellationToken);
 
@@ -58,60 +98,76 @@ namespace TrainerClientManagement.API.Controllers
         {
             var appointment = await _context.Appointments
                 .AsNoTracking()
-                .Where(a => a.Id == id)
-                .Select(a => new AppointmentDto
+                .Where(item => item.Id == id)
+                .Select(item => new AppointmentDto
                 {
-                    Id = a.Id,
-                    AppointmentDate = a.AppointmentDate,
-                    Status = a.Status,
-                    TrainerId = a.TrainerId,
-                    TrainerName = a.Trainer != null ? a.Trainer.Name : string.Empty,
-                    ClientId = a.ClientId,
-                    ClientName = a.Client != null ? a.Client.Name : string.Empty
+                    Id = item.Id,
+                    AppointmentDate = item.AppointmentDate,
+                    Status = item.Status,
+                    DurationMinutes = item.DurationMinutes,
+                    TrainerId = item.TrainerId,
+                    TrainerName = item.Trainer != null ? item.Trainer.Name : string.Empty,
+                    ClientId = item.ClientId,
+                    ClientName = item.Client != null ? item.Client.Name : string.Empty
                 })
                 .FirstOrDefaultAsync(cancellationToken);
 
             return appointment is null ? NotFound() : Ok(appointment);
         }
 
-        // Einen Termin erstellen
         [HttpPost]
         [ProducesResponseType(typeof(AppointmentDto), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<AppointmentDto>> PostAppointment(
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status409Conflict)]
+        public async Task<ActionResult<AppointmentDto>> CreateAppointment(
             CreateAppointmentDto dto,
             CancellationToken cancellationToken)
         {
             if (dto.AppointmentDate == default)
             {
-                ModelState.AddModelError(nameof(dto.AppointmentDate), "Bitte geben Sie ein gültiges Termindatum ein.");
+                ModelState.AddModelError(
+                    nameof(dto.AppointmentDate),
+                    "Geçerli bir randevu tarihi girilmelidir.");
                 return ValidationProblem(ModelState);
             }
 
-            var trainerExists = await _context.Trainers
-                .AnyAsync(t => t.Id == dto.TrainerId, cancellationToken);
-            if (!trainerExists)
+            var trainerClientExists = await _context.Clients.AnyAsync(
+                client => client.Id == dto.ClientId && client.TrainerId == dto.TrainerId,
+                cancellationToken);
+            if (!trainerClientExists)
             {
                 return Problem(
                     statusCode: StatusCodes.Status400BadRequest,
-                    title: "Ungültiger Trainer",
-                    detail: "Ein Trainer mit der angegebenen ID wurde nicht gefunden.");
+                    title: "Geçersiz eğitmen/danışan eşleşmesi",
+                    detail: "Danışan, belirtilen eğitmene atanmış değil.");
             }
 
-            var clientExists = await _context.Clients
-                .AnyAsync(c => c.Id == dto.ClientId, cancellationToken);
-            if (!clientExists)
+            var normalizedStatus = NormalizeStatus(dto.Status);
+            if (normalizedStatus is null)
             {
-                return Problem(
-                    statusCode: StatusCodes.Status400BadRequest,
-                    title: "Ungültiger Kunde",
-                    detail: "Ein Kunde mit der angegebenen ID wurde nicht gefunden.");
+                ModelState.AddModelError(
+                    nameof(dto.Status),
+                    "Durum Scheduled, Completed veya Cancelled olmalıdır.");
+                return ValidationProblem(ModelState);
+            }
+
+            if (normalizedStatus == "Scheduled"
+                && await HasScheduleConflictAsync(
+                    dto.TrainerId,
+                    dto.ClientId,
+                    dto.AppointmentDate,
+                    dto.DurationMinutes,
+                    excludedAppointmentId: null,
+                    cancellationToken))
+            {
+                return ScheduleConflict();
             }
 
             var appointment = new Appointment
             {
                 AppointmentDate = dto.AppointmentDate,
-                Status = NormalizeStatus(dto.Status),
+                Status = normalizedStatus,
+                DurationMinutes = dto.DurationMinutes,
                 TrainerId = dto.TrainerId,
                 ClientId = dto.ClientId
             };
@@ -119,30 +175,153 @@ namespace TrainerClientManagement.API.Controllers
             _context.Appointments.Add(appointment);
             await _context.SaveChangesAsync(cancellationToken);
 
-            var response = await _context.Appointments
-                .AsNoTracking()
-                .Where(a => a.Id == appointment.Id)
-                .Select(a => new AppointmentDto
-                {
-                    Id = a.Id,
-                    AppointmentDate = a.AppointmentDate,
-                    Status = a.Status,
-                    TrainerId = a.TrainerId,
-                    TrainerName = a.Trainer != null ? a.Trainer.Name : string.Empty,
-                    ClientId = a.ClientId,
-                    ClientName = a.Client != null ? a.Client.Name : string.Empty
-                })
-                .SingleAsync(cancellationToken);
-
+            var response = await GetAppointmentDtoAsync(appointment.Id, cancellationToken);
             return CreatedAtAction(nameof(GetAppointment), new { id = appointment.Id }, response);
         }
 
-        private static string NormalizeStatus(string status) => status.ToUpperInvariant() switch
+        [HttpPut("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        public async Task<IActionResult> UpdateAppointment(
+            int id,
+            UpdateAppointmentDto dto,
+            CancellationToken cancellationToken)
+        {
+            var appointment = await _context.Appointments.FindAsync([id], cancellationToken);
+            if (appointment is null)
+            {
+                return NotFound();
+            }
+
+            if (dto.AppointmentDate == default)
+            {
+                ModelState.AddModelError(
+                    nameof(dto.AppointmentDate),
+                    "Geçerli bir randevu tarihi girilmelidir.");
+                return ValidationProblem(ModelState);
+            }
+
+            var trainerClientExists = await _context.Clients.AnyAsync(
+                client => client.Id == dto.ClientId && client.TrainerId == dto.TrainerId,
+                cancellationToken);
+            if (!trainerClientExists)
+            {
+                return Problem(
+                    statusCode: StatusCodes.Status400BadRequest,
+                    title: "Geçersiz eğitmen/danışan eşleşmesi",
+                    detail: "Danışan, belirtilen eğitmene atanmış değil.");
+            }
+
+            var normalizedStatus = NormalizeStatus(dto.Status);
+            if (normalizedStatus is null)
+            {
+                ModelState.AddModelError(
+                    nameof(dto.Status),
+                    "Durum Scheduled, Completed veya Cancelled olmalıdır.");
+                return ValidationProblem(ModelState);
+            }
+
+            if (normalizedStatus == "Scheduled"
+                && await HasScheduleConflictAsync(
+                    dto.TrainerId,
+                    dto.ClientId,
+                    dto.AppointmentDate,
+                    dto.DurationMinutes,
+                    id,
+                    cancellationToken))
+            {
+                return ScheduleConflict();
+            }
+
+            appointment.AppointmentDate = dto.AppointmentDate;
+            appointment.Status = normalizedStatus;
+            appointment.DurationMinutes = dto.DurationMinutes;
+            appointment.TrainerId = dto.TrainerId;
+            appointment.ClientId = dto.ClientId;
+            await _context.SaveChangesAsync(cancellationToken);
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> DeleteAppointment(int id, CancellationToken cancellationToken)
+        {
+            var appointment = await _context.Appointments.FindAsync([id], cancellationToken);
+            if (appointment is null)
+            {
+                return NotFound();
+            }
+
+            _context.Appointments.Remove(appointment);
+            await _context.SaveChangesAsync(cancellationToken);
+            return NoContent();
+        }
+
+        private async Task<bool> HasScheduleConflictAsync(
+            int trainerId,
+            int clientId,
+            DateTime appointmentDate,
+            int durationMinutes,
+            int? excludedAppointmentId,
+            CancellationToken cancellationToken)
+        {
+            var existingAppointments = await _context.Appointments
+                .AsNoTracking()
+                .Where(appointment =>
+                    appointment.Status == "Scheduled"
+                    && (appointment.TrainerId == trainerId || appointment.ClientId == clientId)
+                    && (!excludedAppointmentId.HasValue || appointment.Id != excludedAppointmentId.Value))
+                .Select(appointment => new
+                {
+                    appointment.AppointmentDate,
+                    appointment.DurationMinutes
+                })
+                .ToListAsync(cancellationToken);
+
+            var requestedEnd = appointmentDate.AddMinutes(durationMinutes);
+            return existingAppointments.Any(existing =>
+            {
+                var existingEnd = existing.AppointmentDate.AddMinutes(existing.DurationMinutes);
+                return appointmentDate < existingEnd && existing.AppointmentDate < requestedEnd;
+            });
+        }
+
+        private async Task<AppointmentDto> GetAppointmentDtoAsync(
+            int id,
+            CancellationToken cancellationToken)
+        {
+            return await _context.Appointments
+                .AsNoTracking()
+                .Where(appointment => appointment.Id == id)
+                .Select(appointment => new AppointmentDto
+                {
+                    Id = appointment.Id,
+                    AppointmentDate = appointment.AppointmentDate,
+                    Status = appointment.Status,
+                    DurationMinutes = appointment.DurationMinutes,
+                    TrainerId = appointment.TrainerId,
+                    TrainerName = appointment.Trainer != null ? appointment.Trainer.Name : string.Empty,
+                    ClientId = appointment.ClientId,
+                    ClientName = appointment.Client != null ? appointment.Client.Name : string.Empty
+                })
+                .SingleAsync(cancellationToken);
+        }
+
+        private ObjectResult ScheduleConflict() => Problem(
+            statusCode: StatusCodes.Status409Conflict,
+            title: "Randevu çakışması",
+            detail: "Eğitmen veya danışan seçilen saat aralığında başka bir randevuya sahip.");
+
+        private static string? NormalizeStatus(string status) => status.Trim().ToUpperInvariant() switch
         {
             "SCHEDULED" => "Scheduled",
             "COMPLETED" => "Completed",
             "CANCELLED" => "Cancelled",
-            _ => status
+            _ => null
         };
     }
 }

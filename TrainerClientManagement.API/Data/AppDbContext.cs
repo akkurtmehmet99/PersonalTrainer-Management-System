@@ -34,6 +34,36 @@ namespace TrainerClientManagement.API.Data
                 .WithMany()
                 .HasForeignKey(appointment => appointment.ClientId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Trainer>()
+                .Property(trainer => trainer.Email)
+                .UseCollation("NOCASE");
+
+            modelBuilder.Entity<Trainer>()
+                .HasIndex(trainer => trainer.Email)
+                .IsUnique();
+
+            modelBuilder.Entity<Client>()
+                .Property(client => client.Email)
+                .UseCollation("NOCASE");
+
+            modelBuilder.Entity<Client>()
+                .HasIndex(client => client.Email)
+                .IsUnique();
+
+            modelBuilder.Entity<Appointment>()
+                .HasIndex(appointment => new
+                {
+                    appointment.TrainerId,
+                    appointment.AppointmentDate
+                });
+
+            modelBuilder.Entity<Appointment>()
+                .HasIndex(appointment => new
+                {
+                    appointment.ClientId,
+                    appointment.AppointmentDate
+                });
         }
     }
 }

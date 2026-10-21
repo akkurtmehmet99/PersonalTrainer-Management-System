@@ -7,6 +7,7 @@ namespace TrainerClientManagement.API.DTOs
         public int Id { get; set; }
         public DateTime AppointmentDate { get; set; }
         public string Status { get; set; } = string.Empty;
+        public int DurationMinutes { get; set; }
         public int TrainerId { get; set; }
         public string TrainerName { get; set; } = string.Empty;
         public int ClientId { get; set; }
@@ -17,6 +18,9 @@ namespace TrainerClientManagement.API.DTOs
     {
         public DateTime AppointmentDate { get; set; }
 
+        [Range(15, 240, ErrorMessage = "Die Dauer muss zwischen 15 und 240 Minuten liegen.")]
+        public int DurationMinutes { get; set; } = 60;
+
         [Required(ErrorMessage = "Der Terminstatus ist erforderlich.")]
         [RegularExpression("^(?i:Scheduled|Completed|Cancelled)$", ErrorMessage = "Der Terminstatus muss Scheduled, Completed oder Cancelled sein.")]
         public string Status { get; set; } = "Scheduled";
@@ -26,5 +30,9 @@ namespace TrainerClientManagement.API.DTOs
 
         [Range(1, int.MaxValue, ErrorMessage = "Bitte wählen Sie einen gültigen Kunden aus.")]
         public int ClientId { get; set; }
+    }
+
+    public sealed class UpdateAppointmentDto : CreateAppointmentDto
+    {
     }
 }

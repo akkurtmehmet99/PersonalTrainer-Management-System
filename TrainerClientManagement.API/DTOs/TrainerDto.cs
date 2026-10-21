@@ -25,4 +25,8 @@ namespace TrainerClientManagement.API.DTOs
         [EmailAddress(ErrorMessage = "Bitte geben Sie eine gültige E-Mail-Adresse ein.")]
         public string Email { get; set; } = string.Empty;
     }
+
+    public sealed class UpdateTrainerDto : CreateTrainerDto
+    {
+    }
 }
