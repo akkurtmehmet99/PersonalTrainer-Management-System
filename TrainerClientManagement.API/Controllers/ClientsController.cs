@@ -83,8 +83,8 @@ namespace TrainerClientManagement.API.Controllers
             {
                 return Problem(
                     statusCode: StatusCodes.Status400BadRequest,
-                    title: "Geçersiz eğitmen",
-                    detail: "Belirtilen eğitmen bulunamadı.");
+                    title: "Ungültiger Trainer",
+                    detail: "Der angegebene Trainer wurde nicht gefunden.");
             }
 
             var email = dto.Email.Trim();
@@ -94,8 +94,8 @@ namespace TrainerClientManagement.API.Controllers
             {
                 return Problem(
                     statusCode: StatusCodes.Status409Conflict,
-                    title: "E-posta adresi kullanımda",
-                    detail: "Bu e-posta adresi başka bir danışan tarafından kullanılıyor.");
+                    title: "E-Mail-Adresse bereits vergeben",
+                    detail: "Diese E-Mail-Adresse wird bereits von einem anderen Kunden verwendet.");
             }
 
             var client = new Client
@@ -138,8 +138,8 @@ namespace TrainerClientManagement.API.Controllers
             {
                 return Problem(
                     statusCode: StatusCodes.Status400BadRequest,
-                    title: "Geçersiz eğitmen",
-                    detail: "Belirtilen eğitmen bulunamadı.");
+                    title: "Ungültiger Trainer",
+                    detail: "Der angegebene Trainer wurde nicht gefunden.");
             }
 
             if (client.TrainerId != dto.TrainerId
@@ -149,8 +149,8 @@ namespace TrainerClientManagement.API.Controllers
             {
                 return Problem(
                     statusCode: StatusCodes.Status409Conflict,
-                    title: "Danışan başka eğitmene aktarılamıyor",
-                    detail: "Danışanın randevuları varken eğitmeni değiştirilemez. Önce randevuları güncelleyin veya silin.");
+                    title: "Trainer kann nicht geändert werden",
+                    detail: "Der Trainer eines Kunden mit bestehenden Terminen kann nicht geändert werden. Aktualisieren oder löschen Sie zuerst die Termine.");
             }
 
             var email = dto.Email.Trim();
@@ -160,8 +160,8 @@ namespace TrainerClientManagement.API.Controllers
             {
                 return Problem(
                     statusCode: StatusCodes.Status409Conflict,
-                    title: "E-posta adresi kullanımda",
-                    detail: "Bu e-posta adresi başka bir danışan tarafından kullanılıyor.");
+                    title: "E-Mail-Adresse bereits vergeben",
+                    detail: "Diese E-Mail-Adresse wird bereits von einem anderen Kunden verwendet.");
             }
 
             client.Name = dto.Name.Trim();
@@ -191,8 +191,8 @@ namespace TrainerClientManagement.API.Controllers
             {
                 return Problem(
                     statusCode: StatusCodes.Status409Conflict,
-                    title: "Danışan silinemiyor",
-                    detail: "Danışana bağlı randevular önce silinmelidir.");
+                    title: "Kunde kann nicht gelöscht werden",
+                    detail: "Zugeordnete Termine müssen zuerst gelöscht werden.");
             }
 
             _context.Clients.Remove(client);

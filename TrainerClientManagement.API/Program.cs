@@ -8,7 +8,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 if (string.IsNullOrWhiteSpace(connectionString))
 {
     throw new InvalidOperationException(
-        "Connection string 'DefaultConnection' is not configured.");
+        "Die Verbindungszeichenfolge 'DefaultConnection' ist nicht konfiguriert.");
 }
 
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -20,9 +20,9 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
     {
-        Title = "Personal Trainer Management API",
+        Title = "Personal-Training-Verwaltungs-API",
         Version = "v1",
-        Description = "RESTful API zur Verwaltung von Trainern, Kunden und Coaching-Sitzungen."
+        Description = "RESTful API zur Verwaltung von Trainern, Kunden und Trainingsterminen."
     });
 });
 
@@ -33,7 +33,7 @@ app.UseMiddleware<GlobalExceptionMiddleware>();
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Personal Trainer Management API v1");
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Personal-Training-Verwaltungs-API v1");
     c.RoutePrefix = string.Empty;
 });
 

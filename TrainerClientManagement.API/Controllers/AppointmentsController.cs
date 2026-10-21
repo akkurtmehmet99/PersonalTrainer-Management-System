@@ -32,8 +32,8 @@ namespace TrainerClientManagement.API.Controllers
             {
                 return Problem(
                     statusCode: StatusCodes.Status400BadRequest,
-                    title: "Geçersiz tarih aralığı",
-                    detail: "'from' tarihi 'to' tarihinden sonra olamaz.");
+                    title: "Ungültiger Zeitraum",
+                    detail: "Das Datum 'from' darf nicht nach dem Datum 'to' liegen.");
             }
 
             var normalizedStatus = status is null ? null : NormalizeStatus(status);
@@ -41,8 +41,8 @@ namespace TrainerClientManagement.API.Controllers
             {
                 return Problem(
                     statusCode: StatusCodes.Status400BadRequest,
-                    title: "Geçersiz randevu durumu",
-                    detail: "Durum Scheduled, Completed veya Cancelled olmalıdır.");
+                    title: "Ungültiger Terminstatus",
+                    detail: "Der Status muss Scheduled, Completed oder Cancelled sein.");
             }
 
             var query = _context.Appointments.AsNoTracking();
@@ -127,7 +127,7 @@ namespace TrainerClientManagement.API.Controllers
             {
                 ModelState.AddModelError(
                     nameof(dto.AppointmentDate),
-                    "Geçerli bir randevu tarihi girilmelidir.");
+                    "Bitte geben Sie ein gültiges Termindatum an.");
                 return ValidationProblem(ModelState);
             }
 
@@ -138,8 +138,8 @@ namespace TrainerClientManagement.API.Controllers
             {
                 return Problem(
                     statusCode: StatusCodes.Status400BadRequest,
-                    title: "Geçersiz eğitmen/danışan eşleşmesi",
-                    detail: "Danışan, belirtilen eğitmene atanmış değil.");
+                    title: "Ungültige Trainer-Kunden-Zuordnung",
+                    detail: "Der Kunde ist dem angegebenen Trainer nicht zugeordnet.");
             }
 
             var normalizedStatus = NormalizeStatus(dto.Status);
@@ -147,7 +147,7 @@ namespace TrainerClientManagement.API.Controllers
             {
                 ModelState.AddModelError(
                     nameof(dto.Status),
-                    "Durum Scheduled, Completed veya Cancelled olmalıdır.");
+                    "Der Status muss Scheduled, Completed oder Cancelled sein.");
                 return ValidationProblem(ModelState);
             }
 
@@ -199,7 +199,7 @@ namespace TrainerClientManagement.API.Controllers
             {
                 ModelState.AddModelError(
                     nameof(dto.AppointmentDate),
-                    "Geçerli bir randevu tarihi girilmelidir.");
+                    "Bitte geben Sie ein gültiges Termindatum an.");
                 return ValidationProblem(ModelState);
             }
 
@@ -210,8 +210,8 @@ namespace TrainerClientManagement.API.Controllers
             {
                 return Problem(
                     statusCode: StatusCodes.Status400BadRequest,
-                    title: "Geçersiz eğitmen/danışan eşleşmesi",
-                    detail: "Danışan, belirtilen eğitmene atanmış değil.");
+                    title: "Ungültige Trainer-Kunden-Zuordnung",
+                    detail: "Der Kunde ist dem angegebenen Trainer nicht zugeordnet.");
             }
 
             var normalizedStatus = NormalizeStatus(dto.Status);
@@ -219,7 +219,7 @@ namespace TrainerClientManagement.API.Controllers
             {
                 ModelState.AddModelError(
                     nameof(dto.Status),
-                    "Durum Scheduled, Completed veya Cancelled olmalıdır.");
+                    "Der Status muss Scheduled, Completed oder Cancelled sein.");
                 return ValidationProblem(ModelState);
             }
 
@@ -313,8 +313,8 @@ namespace TrainerClientManagement.API.Controllers
 
         private ObjectResult ScheduleConflict() => Problem(
             statusCode: StatusCodes.Status409Conflict,
-            title: "Randevu çakışması",
-            detail: "Eğitmen veya danışan seçilen saat aralığında başka bir randevuya sahip.");
+            title: "Terminkonflikt",
+            detail: "Der Trainer oder Kunde hat im gewählten Zeitraum bereits einen anderen Termin.");
 
         private static string? NormalizeStatus(string status) => status.Trim().ToUpperInvariant() switch
         {

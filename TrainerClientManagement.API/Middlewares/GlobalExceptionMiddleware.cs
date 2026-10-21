@@ -49,7 +49,7 @@ namespace TrainerClientManagement.API.Middlewares
             var problemDetails = new ProblemDetails
             {
                 Status = StatusCodes.Status500InternalServerError,
-                Title = "Serverfehler",
+                Title = "Interner Serverfehler",
                 Detail = "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.",
                 Instance = context.Request.Path
             };

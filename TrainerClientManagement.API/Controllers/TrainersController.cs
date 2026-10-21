@@ -69,8 +69,8 @@ namespace TrainerClientManagement.API.Controllers
             {
                 return Problem(
                     statusCode: StatusCodes.Status409Conflict,
-                    title: "E-posta adresi kullanımda",
-                    detail: "Bu e-posta adresi başka bir eğitmen tarafından kullanılıyor.");
+                    title: "E-Mail-Adresse bereits vergeben",
+                    detail: "Diese E-Mail-Adresse wird bereits von einem anderen Trainer verwendet.");
             }
 
             var trainer = new Trainer
@@ -111,8 +111,8 @@ namespace TrainerClientManagement.API.Controllers
             {
                 return Problem(
                     statusCode: StatusCodes.Status409Conflict,
-                    title: "E-posta adresi kullanımda",
-                    detail: "Bu e-posta adresi başka bir eğitmen tarafından kullanılıyor.");
+                    title: "E-Mail-Adresse bereits vergeben",
+                    detail: "Diese E-Mail-Adresse wird bereits von einem anderen Trainer verwendet.");
             }
 
             trainer.Name = dto.Name.Trim();
@@ -146,8 +146,8 @@ namespace TrainerClientManagement.API.Controllers
             {
                 return Problem(
                     statusCode: StatusCodes.Status409Conflict,
-                    title: "Eğitmen silinemiyor",
-                    detail: "Eğitmene bağlı danışan veya randevular önce başka bir eğitmene aktarılmalı ya da silinmelidir.");
+                    title: "Trainer kann nicht gelöscht werden",
+                    detail: "Zugeordnete Kunden oder Termine müssen zuerst einem anderen Trainer zugewiesen oder gelöscht werden.");
             }
 
             _context.Trainers.Remove(trainer);
