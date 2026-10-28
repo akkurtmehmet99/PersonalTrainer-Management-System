@@ -11,6 +11,7 @@ Eine ASP.NET-Core-Web-API zur Verwaltung von Personal Trainern, Kunden und indiv
 ## Funktionen
 
 - Vollständige CRUD-REST-API für Trainer, Kunden und Termine
+- Responsive deutschsprachige Weboberfläche für Übersicht sowie Trainer-, Kunden- und Terminverwaltung
 - Persistente Datenspeicherung mit Entity Framework Core 8 und SQLite
 - DTOs für Anfragen und Antworten sowie Validierung mit Data Annotations
 - Terminfilter nach Status, Zeitraum, Trainer und Kunde
@@ -33,7 +34,9 @@ dotnet restore TrainerClientManagement.API.sln
 dotnet run --project TrainerClientManagement.API/TrainerClientManagement.API.csproj
 ```
 
-Beim Start wird die SQLite-Datei `trainer-client-management.db` im aktuellen Arbeitsverzeichnis erstellt. Die Verbindungszeichenfolge kann über `ConnectionStrings:DefaultConnection` in `TrainerClientManagement.API/appsettings.json` angepasst werden. Die Swagger-Oberfläche ist unter der von der Anwendung ausgegebenen Adresse verfügbar.
+Beim Start wird die SQLite-Datei `trainer-client-management.db` im aktuellen Arbeitsverzeichnis erstellt. Die Verbindungszeichenfolge kann über `ConnectionStrings:DefaultConnection` in `TrainerClientManagement.API/appsettings.json` angepasst werden. Die Weboberfläche ist unter der von der Anwendung ausgegebenen Adresse verfügbar; Swagger UI finden Sie unter `/swagger`.
+
+Die deutschsprachige Weboberfläche verwendet dieselben API-Endpunkte und speichert Änderungen direkt in der SQLite-Datenbank. Sie enthält eine Übersicht sowie das Anlegen, Bearbeiten, Löschen und Filtern von Trainern, Kunden und Terminen.
 
 > Das Datenbankschema wird beim ersten Start erstellt. `EnsureCreated` aktualisiert kein vorhandenes Schema. Verwenden Sie für Schemaänderungen an bestehenden Datenbanken EF-Core-Migrationen.
 >

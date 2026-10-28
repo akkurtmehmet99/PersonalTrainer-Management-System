@@ -102,7 +102,7 @@ namespace TrainerClientManagement.API.Controllers
             {
                 Name = dto.Name.Trim(),
                 Email = email,
-                Phone = dto.Phone.Trim(),
+                Phone = dto.Phone?.Trim() ?? string.Empty,
                 TrainerId = dto.TrainerId
             };
 
@@ -166,7 +166,7 @@ namespace TrainerClientManagement.API.Controllers
 
             client.Name = dto.Name.Trim();
             client.Email = email;
-            client.Phone = dto.Phone.Trim();
+            client.Phone = dto.Phone?.Trim() ?? string.Empty;
             client.TrainerId = dto.TrainerId;
             await _context.SaveChangesAsync(cancellationToken);
 

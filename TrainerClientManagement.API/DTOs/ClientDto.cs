@@ -25,7 +25,7 @@ namespace TrainerClientManagement.API.DTOs
 
         [StringLength(32, ErrorMessage = "Die Telefonnummer darf maximal 32 Zeichen lang sein.")]
         [Phone(ErrorMessage = "Bitte geben Sie eine gültige Telefonnummer ein.")]
-        public string Phone { get; set; } = string.Empty;
+        public string? Phone { get; set; }
 
         [Range(1, int.MaxValue, ErrorMessage = "Bitte wählen Sie einen gültigen Trainer aus.")]
         public int TrainerId { get; set; }

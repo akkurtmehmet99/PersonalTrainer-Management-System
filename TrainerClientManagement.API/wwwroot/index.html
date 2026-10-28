@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#111827">
+    <title>FitDesk | Trainerverwaltung</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+</head>
+<body>
+    <div class="app-shell">
+        <aside class="sidebar">
+            <a class="brand" href="/" aria-label="FitDesk Startseite">
+                <span class="brand-mark">F</span>
+                <span>fit<span class="brand-light">desk</span><small>TRAINER-DASHBOARD</small></span>
+            </a>
+            <p class="nav-label">ARBEITSBEREICH</p>
+            <nav aria-label="Hauptnavigation">
+                <button class="nav-link active" data-view="dashboard"><span class="nav-icon">⌂</span> Übersicht</button>
+                <button class="nav-link" data-view="appointments"><span class="nav-icon">▦</span> Termine</button>
+                <button class="nav-link" data-view="clients"><span class="nav-icon">♙</span> Kunden</button>
+                <button class="nav-link" data-view="trainers"><span class="nav-icon">♧</span> Trainer</button>
+            </nav>
+            <div class="sidebar-bottom">
+                <span class="connection-dot"></span>
+                <span>SQLite-Datenbank verbunden</span>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div>
+                    <p class="eyebrow">PERSONAL-TRAINING-VERWALTUNG</p>
+                    <h1 id="page-title">Übersicht</h1>
+                    <p class="page-description" id="page-description">Die heutige Übersicht Ihres Studios.</p>
+                </div>
+                <div class="topbar-actions">
+                    <a class="icon-button" href="/swagger" title="API-Dokumentation" aria-label="API-Dokumentation">⌘</a>
+                    <div class="avatar" aria-hidden="true">FD</div>
+                </div>
+            </header>
+
+            <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+
+            <section id="view-dashboard" class="page-view active">
+                <div class="welcome-card">
+                    <div>
+                        <p class="eyebrow">TAGESÜBERSICHT</p>
+                        <h2>Guten Tag! <span class="welcome-spark">✦</span></h2>
+                        <p>Verwalten Sie Ihre Kunden und Trainingspläne an einem Ort.</p>
+                    </div>
+                    <button class="button button-light" data-create="appointment">＋ Termin erstellen</button>
+                    <div class="welcome-orb" aria-hidden="true"></div>
+                </div>
+
+                <div class="stats-grid">
+                    <article class="stat-card">
+                        <div class="stat-heading"><span>Kunden insgesamt</span><span class="stat-icon mint">♙</span></div>
+                        <p class="stat-value" id="stat-clients">—</p>
+                        <p class="stat-caption">Registrierte Kunden</p>
+                    </article>
+                    <article class="stat-card">
+                        <div class="stat-heading"><span>Trainer</span><span class="stat-icon lavender">♧</span></div>
+                        <p class="stat-value" id="stat-trainers">—</p>
+                        <p class="stat-caption">Registrierte Trainer</p>
+                    </article>
+                    <article class="stat-card">
+                        <div class="stat-heading"><span>Bevorstehende Termine</span><span class="stat-icon peach">▦</span></div>
+                        <p class="stat-value" id="stat-upcoming">—</p>
+                        <p class="stat-caption">Geplante Trainingseinheiten</p>
+                    </article>
+                </div>
+
+                <section class="panel">
+                    <div class="panel-heading">
+                        <div><p class="eyebrow">KALENDER</p><h2>Bevorstehende Termine</h2></div>
+                        <button class="text-button" data-navigate="appointments">Alle anzeigen <span>→</span></button>
+                    </div>
+                    <div class="table-wrap">
+                        <table>
+                            <thead><tr><th>DATUM &amp; UHRZEIT</th><th>KUNDE</th><th>TRAINER</th><th>DAUER</th><th>STATUS</th></tr></thead>
+                            <tbody id="upcoming-table"></tbody>
+                        </table>
+                    </div>
+                </section>
+            </section>
+
+            <section id="view-trainers" class="page-view">
+                <div class="list-toolbar">
+                    <label class="search-box"><span>⌕</span><input id="trainer-search" type="search" placeholder="Trainer suchen ..." aria-label="Trainer suchen"></label>
+                    <button class="button button-primary" data-create="trainer">＋ Trainer hinzufügen</button>
+                </div>
+                <section class="panel">
+                    <div class="table-wrap">
+                        <table>
+                            <thead><tr><th>TRAINER</th><th>SPEZIALGEBIET</th><th>E-MAIL</th><th></th></tr></thead>
+                            <tbody id="trainers-table"></tbody>
+                        </table>
+                    </div>
+                </section>
+            </section>
+
+            <section id="view-clients" class="page-view">
+                <div class="list-toolbar">
+                    <label class="search-box"><span>⌕</span><input id="client-search" type="search" placeholder="Kunden suchen ..." aria-label="Kunden suchen"></label>
+                    <button class="button button-primary" data-create="client">＋ Kunde hinzufügen</button>
+                </div>
+                <section class="panel">
+                    <div class="table-wrap">
+                        <table>
+                            <thead><tr><th>KUNDE</th><th>E-MAIL</th><th>TELEFON</th><th>TRAINER</th><th></th></tr></thead>
+                            <tbody id="clients-table"></tbody>
+                        </table>
+                    </div>
+                </section>
+            </section>
+
+            <section id="view-appointments" class="page-view">
+                <div class="list-toolbar">
+                    <label class="search-box"><span>⌕</span><input id="appointment-search" type="search" placeholder="Kunde oder Trainer suchen ..." aria-label="Termine durchsuchen"></label>
+                    <label class="filter-label">Status
+                        <select id="appointment-status-filter" aria-label="Termine nach Status filtern">
+                            <option value="">Alle</option>
+                            <option value="Scheduled">Geplant</option>
+                            <option value="Completed">Abgeschlossen</option>
+                            <option value="Cancelled">Abgesagt</option>
+                        </select>
+                    </label>
+                    <button class="button button-primary" data-create="appointment">＋ Termin hinzufügen</button>
+                </div>
+                <section class="panel">
+                    <div class="table-wrap">
+                        <table>
+                            <thead><tr><th>DATUM &amp; UHRZEIT</th><th>KUNDE</th><th>TRAINER</th><th>DAUER</th><th>STATUS</th><th></th></tr></thead>
+                            <tbody id="appointments-table"></tbody>
+                        </table>
+                    </div>
+                </section>
+            </section>
+
+            <footer class="footer"><span>FitDesk · Trainerverwaltung</span><span>Ihre Daten werden in SQLite gespeichert.</span></footer>
+        </main>
+    </div>
+
+    <dialog id="record-dialog" class="record-dialog">
+        <form id="record-form">
+            <div class="dialog-heading">
+                <div><p class="eyebrow" id="dialog-eyebrow">NEUER EINTRAG</p><h2 id="dialog-title">Eintrag erstellen</h2></div>
+                <button class="icon-button dialog-close" type="button" aria-label="Schließen" data-close-dialog>×</button>
+            </div>
+            <div id="form-fields" class="form-fields"></div>
+            <p id="form-error" class="form-error" role="alert" hidden></p>
+            <div class="dialog-actions">
+                <button class="button button-secondary" type="button" data-close-dialog>Abbrechen</button>
+                <button class="button button-primary" id="save-button" type="submit">Speichern</button>
+            </div>
+        </form>
+    </dialog>
+</body>
+</html>
